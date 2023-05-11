@@ -12,7 +12,7 @@ function init() {
 
 window.onload = init();
 
- let data =[];
+let data = [];
 async function getCountry() {
   const respuesta = await fetch("https://restcountries.com/v3.1/all");
   data = await respuesta.json();
@@ -50,7 +50,6 @@ async function getCountry() {
     
            
           `;
-    
   });
 
   // Ahora agregamos el contenido HTML al elemento #country-details-container
@@ -64,16 +63,16 @@ async function getCountry() {
 }
 getCountry();
 
-
 // Obtén una referencia al campo de búsqueda
 const searchInput = document.getElementById("input-field-country");
 
-
 function mostrarResultados(resultados) {
-  const countryDetailsContainer = document.querySelector("#countries-selection-box");
+  const countryDetailsContainer = document.querySelector(
+    "#countries-selection-box"
+  );
   countryDetailsContainer.innerHTML = ""; // Limpiar el contenido actual antes de mostrar los nuevos resultados
 
-  resultados.forEach(item => {
+  resultados.forEach((item) => {
     const countryHtml = `
       <div class="text-container1">
         <div>
@@ -101,18 +100,38 @@ function mostrarResultados(resultados) {
 }
 
 // Agrega un event listener para el evento "input"
-searchInput.addEventListener('input', function(event) {
+searchInput.addEventListener("input", function (event) {
   // Acciones a realizar cuando se dispara el evento "input"
   const textoIngresado = event.target.value;
   console.log("Texto ingresado:", textoIngresado);
   // Realizar la búsqueda o actualizar los resultados aquí
-  const resultados = data.filter(item => {
-  
+  const resultados = data.filter((item) => {
     const nombreComun = item.name.common.toLowerCase();
     return nombreComun.includes(textoIngresado);
-   
-
   });
- 
+
   mostrarResultados(resultados);
 });
+const regionSelectorTitle = document.querySelector("#region-selector-title");
+const regionSelectorMenu = document.querySelector("#region-selector-menu");
+
+regionSelectorTitle.addEventListener("click", () => {
+  regionSelectorMenu.classList.toggle("display-none");
+  console.log("holaaa");
+});
+
+// let selector = document.querySelector("#region-selector-title");
+// selector.addEventListener("change", function (event) {
+//   // Acciones a realizar cuando se dispara el evento "input"
+
+//   const countryIngresado = event.target.value;
+//   console.log("hola");
+//   console.log("Texto ingresado:", countryIngresado);
+//   // Realizar la búsqueda o actualizar los resultados aquí
+//   const resultadosSelector = data.filter((item) => {
+//     const regionComun = item.region.toLowerCase();
+//     return regionComun.includes(countryIngresado);
+//   });
+
+//   mostrarResultados(resultadosSelector);
+// });
